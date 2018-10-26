@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Prueba NodeJS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="" name="description" />
+		<meta content="" name="author" />
+		<!-- end: META -->
+		<!-- start: GOOGLE FONTS -->
+		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
+		<!-- end: GOOGLE FONTS -->
+		<!-- start: MAIN CSS -->
+		<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/themify-icons/themify-icons.min.css">
+		<link href="vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
+		<link href="vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
+		<link href="vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
+		<!-- end: MAIN CSS -->
+		
+		<link rel="stylesheet" href="assets/css/styles.css">
+		<link rel="stylesheet" href="assets/css/plugins.css">
+		<link rel="stylesheet" href="assets/css/themes/theme-1.css" id="skin_color" />
+	
+		<!-- start: CSS REQUIRED FOR THIS PAGE ONLY -->
+		<!-- end: CSS REQUIRED FOR THIS PAGE ONLY -->
+	</head>
+	<!-- end: HEAD -->
+	<!-- start: BODY -->
+	<body class="login">
+		<!-- start: LOGIN -->
+		<div class="row">
+			<div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+				<div class="logo margin-top-30">
+					<br>
+				</div>
+				<!-- start: LOGIN BOX -->
+				<div class="box-login">
+					<form class="form-login" id="login" method="post">
+						<fieldset>
+							<legend>
+								Iniciar Sesión
+							</legend>
+							<div class="form-group">
+								<span class="input-icon">
+									<input type="email" id="email" class="form-control" name="email" placeholder="Email">
+									<i class="fa fa-user"></i> </span>
+							</div>
+							<div class="form-group form-actions">
+								<span class="input-icon">
+									<input type="password" id="password" class="form-control password" name="password" placeholder="Clave">
+									<i class="fa fa-lock"></i>
+									<!--<a class="forgot" href="login_forgot.html">
+										I forgot my password
+									</a>--> </span>
+							</div>
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary pull-right">
+									Ingresar <i class="fa fa-arrow-circle-right"></i>
+								</button>
+							</div>
+							<div class="new-account">
+								Aún no tienes cuenta?
+								<a href="/signup">
+									Crea una cuenta
+								</a>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<!-- end: LOGIN BOX -->
+			</div>
+		</div>
+		<!-- end: LOGIN -->
+		<!-- start: MAIN JAVASCRIPTS -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script src="vendor/modernizr/modernizr.js"></script>
+		<script src="vendor/jquery-cookie/jquery.cookie.js"></script>
+		<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+		<script src="vendor/switchery/switchery.min.js"></script>
+		<!-- end: MAIN JAVASCRIPTS -->
+		<!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+		<!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
+		<script src="assets/js/main.js"></script>
+		<!-- start: JavaScript Event Handlers for this page -->
+		<script src="assets/js/login.js"></script>
+	<script type="text/javascript">
+			jQuery(document).ready(function() {
+				Main.init();
+				Login.init();
+			});
+
+
+			$('#login').on('submit', function(e){
+                e.preventDefault();
+                let email = $('#email');
+                let password = $('#password');
+
+                $.ajax({
+                url: '/api/signin',
+                method: 'POST',
+                data: {
+                    email: email.val(),
+                    password: password.val(),
+
+                },
+                success: function(data){
+                	alert(data.message);
+                	localStorage.setItem('token', data.token);
+                	localStorage.setItem('perfil', data.perfil);
+                    location.href="/home";
+                }
+                })
+             });
+ /* const formLogin = document.querySelector('#login')
+  formLogin.addEventListener('submit', event => {
+    event.preventDefault()
+    const formData = new FormData(formLogin)
+    fetch('/api/signin', {
+       method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+          body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+    	alert(data.message)
+    	localStorage.setItem('token', data.token)
+    	if(data.type == 0){
+    		//location.href="/home";
+    	}else{
+    		alert(data.type)
+    	}
+    		
+      
+    })
+
+  })*/
+</script>
+		<!-- end: JavaScript Event Handlers for this page -->
+	</body>
+	<!-- end: BODY -->
+</html>

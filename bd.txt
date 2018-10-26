@@ -1,0 +1,14 @@
+Title
+FECHA DATE NOW
+HORA DE LLEGADA 
+HORA DE SALIDA
+Nota
+
+Horas de trabajo preferidas
+
+
+api.get('/hour', HourCtrl.getHours)
+api.get('/hour', HourCtrl.getHour)
+api.post('/hour', HourCtrl.saveHour)
+api.put('/hour', HourCtrl.updateHour)
+api.delete('/hour', HourCtrl.deleteHour)
