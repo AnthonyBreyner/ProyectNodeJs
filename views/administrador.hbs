@@ -57,8 +57,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="active open">
-                        <a href="javascript:void(0)">
+                    <li>
+                        <a href="/verhorasdetrabajo">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-package"></i>
@@ -69,7 +69,7 @@
                             </div>
                         </a>
                     </li>
-                    <li id="adminusuarios">
+                    <li>
                         <a href="adminusuarios">
                             <div class="item-content">
                                 <div class="item-media">
@@ -81,8 +81,8 @@
                             </div>
                         </a>
                     </li>
-                    <li id="administrador">
-                        <a href="/administrador">
+                    <li class="active open">
+                        <a href="maps.html">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-location-pin"></i>
@@ -137,7 +137,7 @@
                     <!-- start: USER OPTIONS DROPDOWN -->
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
-                           <span class="username"><label  id="displayname"></label><i
+                           <span class="username">Peter <i
                                 class="ti-angle-down"></i></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
@@ -162,7 +162,7 @@
                 </div>
                 <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
             </div>
-            <a class="dropdown-off-sidebar" class="app-offsidebar-open" onclick="logout()">
+            <a class="dropdown-off-sidebar" class="app-offsidebar-open" href="onclick="logout()"">
                 &nbsp;
             </a>
             <!-- end: NAVBAR COLLAPSE -->
@@ -174,7 +174,7 @@
                 <section id="page-title">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h1 class="mainTitle">Ver horas de trabajo por día</h1>
+                            <h1 class="mainTitle">Ver horas de trabajo de todos los usuarios</h1>
                         </div>
                     </div>
                 
@@ -252,7 +252,7 @@
         <script src="vendor/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
         <script src="prueba.js"></script>
-        <script src="app.js"></script>
+        <script src="app2.js"></script>
         <script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script src="assets/js/main.js"></script>
@@ -262,14 +262,6 @@
              jQuery(document).ready(function() {
                 Main.init();
                 FormElements.init();
-                $("#displayname").html(localStorage.name);
-
-                if(localStorage.perfil =="usuario"){
-                    $("#adminusuarios").css("display", "none");
-                    $("#administrador").css("display", "none");
-                } else if (localStorage.perfil == "adminusuarios"){
-                    $("#administrador").css("display", "none");
-                }
             })
         </script>
         <!-- end: JavaScript Event Handlers for this page -->

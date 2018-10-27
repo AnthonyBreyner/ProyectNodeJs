@@ -40,28 +40,13 @@ function tabla(datos){
         Edit
         </a></td>
         <td>
-        <a href="#" class="delete-row">
+        <a class="delete-row">
         Delete
         </a></td>
       </tr>
     `
     }
   }
-/*
-  $('table').on('click', '.delete-row', function(e){
-        let row =$(this).closest('tr');
-        let id = row.find('.id').text();
-        $.ajax({
-            url:'/api/hour/' + id, 
-            method: 'delete',
-            headers: myHeaders,
-                success: function (response){
-                    console.log(response);
-                    alert("Elminado");
-                    traer();
-                }
-        })
-    })*/
 }
 
 
@@ -94,6 +79,21 @@ function tabla(datos){
         })
     })
 
-
+$('table').on('click', '.delete-row', function(e) {
+    let row = $(this).closest('tr');
+    let id = row.find('.id').text();
+    $.ajax({
+        url: '/api/user/' + id,
+        method: 'delete',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('authorization', `Bearer ` + localStorage.token);
+        },
+        success: function(response) {
+            console.log(response);
+            alert("Elminado");
+            traer();
+        }
+    })
+})
 
 

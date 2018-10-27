@@ -3,23 +3,17 @@ var mostar = document.querySelector('#mostar')
 function traer() {
     const myHeaders = new Headers();
     myHeaders.append('authorization', `Bearer ${localStorage.token}`)
-        fetch('/api/houruser', {
-            method: 'POST',
-            data: {
-                userid: localStorage.userid
-            },
+        fetch('/api/hour', {
+            method: 'GET',
             headers: myHeaders
-        })
-        .then(res => res.json())
-        .then(datos => {
-            console.log(localStorage.userid)
+        }).then(res => res.json()).then(datos => {
             //console.log(datos)
             tabla(datos)
-        })
+        }) 
 }
 
 function tabla(datos) {
-    console.log(datos)    
+    console.log(datos)
     mostrar.innerHTML = ''
     for (let i in datos) {
         for (let j in datos[i]) {
@@ -42,7 +36,7 @@ function tabla(datos) {
                 if (horafinal.substr(1, 1) == ":") {
                 suma1 =horafinal.substr(0, 1);}
                 }
-                alert(suma1)
+
            var mints=datos[i][j].entrytime.substr(2, 2)
             if (mints.substr(0, 1)==":") {mints=datos[i][j].entrytime.substr(3, 2)}
              //Fin hora entrada
@@ -80,7 +74,7 @@ function tabla(datos) {
         Edit
         </a></td>
         <td>
-        <a href="#" class="delete-row">
+        <a class="delete-row">
         Delete
         </a></td>
       </tr>
@@ -89,7 +83,7 @@ function tabla(datos) {
     }
 }
 $('table').on('click', '.edit-row', function(e) {
-    $('.description').prop('disabled', false);
+
     let row = $(this).closest('tr');
     let id = row.find('.id').text();
     let entrytime = row.find('.entrytime').val();
@@ -107,7 +101,9 @@ $('table').on('click', '.edit-row', function(e) {
             description: description
         },
         success: function(response) {
-            console.log(response);
+           console.log(response);
+            alert("Actualizado");
+            traer();
         }
     })
 })

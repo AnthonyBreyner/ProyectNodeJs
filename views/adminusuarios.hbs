@@ -81,8 +81,8 @@
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="maps.html">
+                    <li id="administrador">
+                        <a href="/administrador">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-location-pin"></i>
@@ -137,7 +137,7 @@
                     <!-- start: USER OPTIONS DROPDOWN -->
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
-                           <span class="username">Peter <i
+                           <span class="username"><label id="displayname"></label> <i
                                 class="ti-angle-down"></i></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
@@ -147,7 +147,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="login_signin.html">
+                                <a onclick="logout()">
                                     Log Out
                                 </a>
                             </li>
@@ -162,7 +162,7 @@
                 </div>
                 <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
             </div>
-            <a class="dropdown-off-sidebar" class="app-offsidebar-open" href="login_signin.html">
+            <a class="dropdown-off-sidebar" class="app-offsidebar-open" onclick="logout()">
                 &nbsp;
             </a>
             <!-- end: NAVBAR COLLAPSE -->
@@ -254,12 +254,21 @@
         <script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script src="assets/js/main.js"></script>
+         <script src="prueba.js"></script>
         <!-- start: JavaScript Event Handlers for this page -->
         <script src="assets/js/form-elements.js"></script>
         <script>
              jQuery(document).ready(function() {
                 Main.init();
                 FormElements.init();
+                $("#displayname").html(localStorage.name);
+
+                if(localStorage.perfil =="usuario"){
+                    $("#adminusuarios").css("display", "none");
+                    $("#administrador").css("display", "none");
+                }  else if (localStorage.perfil == "adminusuarios"){
+                    $("#administrador").css("display", "none");
+                }
             })
         </script>
         <!-- end: JavaScript Event Handlers for this page -->

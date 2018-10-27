@@ -41,8 +41,8 @@ app.get('/adminusuarios',(req,res)=>{
 	res.render('adminusuarios')
 })
 
-app.get('/', (req, res) => {
-  res.render('product')
+app.get('/administrador', (req, res) => {
+  res.render('administrador')
 })
 
 

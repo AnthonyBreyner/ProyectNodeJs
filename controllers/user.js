@@ -17,7 +17,7 @@ function signUp (req, res) {
 
 
     return res.status(201).send({ token: service.createToken(user) })
-    res.status(200).send({message:"Se registro"})
+    res.status(200).send({message:"Se registro con exito"})
   })
 }
 
@@ -33,7 +33,7 @@ function getUser(req,res){
 function signIn (req, res) {
   User.findOne({ email:req.body.email, password:req.body.password}, (err, user) => {
     if (err) return res.status(500).send({ message: err })
-    if (!user) return res.status(404).send({ message: 'No existe el usuario', email:req.body.email })
+    if (!user) return res.status(404).send({ message: 'No existe el usuario o clave incorrecta' })
  
     req.user = user
     res.status(200).send({
@@ -59,10 +59,24 @@ function updateUser(req,res){
   })
 }
 
+function deleteUser(req,res){
+  let userid=req.params.userid
+
+  User.findById(userid, (err, user)=>{
+    if(err) res.status(500).send({message:`Error al borrar ${err}`})
+      
+    User.remove(err=>{
+      if(err) res.status(500).send({message:`Error al borrar Usuraio ${err}`})
+      res.status(200).send({message:`Eliminado.`})
+    })
+  })
+}
+
 
 module.exports = {
   signUp,
   getUser,
   signIn,
-  updateUser
+  updateUser,
+  deleteUser
 }

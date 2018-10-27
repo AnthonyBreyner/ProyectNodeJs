@@ -68,7 +68,7 @@
                             </div>
                         </a>
                     </li>
-                    <li>
+                    <li id="adminusuarios">
                         <a href="/adminusuarios">
                             <div class="item-content">
                                 <div class="item-media">
@@ -80,8 +80,8 @@
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="maps.html">
+                    <li id="administrador">
+                        <a href="/administrador">
                             <div class="item-content">
                                 <div class="item-media">
                                     <i class="ti-location-pin"></i>
@@ -260,6 +260,7 @@
         <script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script src="assets/js/main.js"></script>
+        <script src="prueba.js"></script>
         <!-- start: JavaScript Event Handlers for this page -->
         <script src="assets/js/form-elements.js"></script>
         <script>
@@ -267,6 +268,13 @@
                 Main.init();
                 FormElements.init();
                 $("#displayname").html(localStorage.name);
+
+                if(localStorage.perfil =="usuario"){
+                    $("#adminusuarios").css("display", "none");
+                    $("#administrador").css("display", "none");
+                }  else if (localStorage.perfil == "adminusuarios"){
+                    $("#administrador").css("display", "none");
+                }
             })
 
 $('#hora').on('submit', function(e){
@@ -277,7 +285,9 @@ $('#hora').on('submit', function(e){
                 let description = $('#description');
                 let horapref = $('input:checkbox[name=horapref]:checked');
                 let userid = localStorage.userid;
+                if(localStorage.perfil =="usuario"){
 
+                }
                 $.ajax({
                 url: '/api/hour',
                 method: 'POST',
@@ -296,14 +306,11 @@ $('#hora').on('submit', function(e){
                     console.log(response);
                     
                 }
-
                 })
+
              });
 
-            function logout(){
-                 localStorage.removeItem('token', localStorage.token)
-                 location.href="/login";
-            }
+            
         </script>
         <!-- end: JavaScript Event Handlers for this page -->
      </dody>

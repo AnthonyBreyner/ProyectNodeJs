@@ -62,3 +62,10 @@ var Horario =  function (hora1, hora2) {
     };
 
 
+function logout(){
+                 localStorage.removeItem('token', localStorage.token);
+                 localStorage.removeItem('name', localStorage.name);
+                 localStorage.removeItem('perfil', localStorage.perfil);
+                 localStorage.removeItem('userid', localStorage.userid);
+                 location.href="/login";
+            }

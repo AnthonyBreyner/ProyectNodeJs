@@ -129,9 +129,10 @@
 			 $('#usario').on('submit', function(e){
 			    e.preventDefault();
 			 	let email = $('#email');
-			 	let displayName = $('#dispayNameame');
+			 	let displayName = $('#displayName');
 			 	let address = $('#address');
 			 	let mobile = $('#mobile');
+			 	let password = $('#password');
 
 			 	$.ajax({
 			 	url: '/api/signup',
@@ -141,6 +142,7 @@
 			 		displayName: displayName.val(),
 			 		address: address.val(),
 			 		mobile: mobile.val(),
+			 		password: password.val(),
 			 	},
 			 	success: function(data){
                     alert("Se registro con exito");
