@@ -136,15 +136,10 @@
                     <!-- start: USER OPTIONS DROPDOWN -->
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
-                           <span class="username">Peter <i
+                           <span class="username"><label  id="displayname"></label><i
                                 class="ti-angle-down"></i></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
-                            <li>
-                                <a href="pages_user_profile.html">
-                                    My Profile
-                                </a>
-                            </li>
                             <li >
                                 <a onclick="logout()">
                                     Log Out
@@ -271,6 +266,7 @@
              jQuery(document).ready(function() {
                 Main.init();
                 FormElements.init();
+                $("#displayname").html(localStorage.name);
             })
 
 $('#hora').on('submit', function(e){
@@ -280,19 +276,20 @@ $('#hora').on('submit', function(e){
                 let departuretime = $('#timepicker-default1');
                 let description = $('#description');
                 let horapref = $('input:checkbox[name=horapref]:checked');
-               
+                let userid = localStorage.userid;
+
                 $.ajax({
                 url: '/api/hour',
                 method: 'POST',
                 beforeSend: function ( xhr ) {
                 xhr.setRequestHeader('authorization', `Bearer `+ localStorage.token);
                 },
-                headers:{token: myHeaders},
                 data: {
                     entrytime: entrytime.val(),
                     departuretime: departuretime.val(),
                     horapref: horapref.val(),
-                    description: description.val()
+                    description: description.val(),
+                    userid: userid,
                 },
                 success: function(response){
                     alert("Se registro con exito.");

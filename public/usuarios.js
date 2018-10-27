@@ -28,7 +28,13 @@ function tabla(datos){
         <td scope="row" id="email"><input type="text" class="email" value="${datos[i][j].email}"></input></td>
         <td scope="row" id="address"><input type="text" class="address" value="${datos[i][j].address}" ></input></td>
         <td scope="row" id="mobile"><input type="text" class="mobile" value="${datos[i][j].mobile}" ></input></td>
-        <td scope="row" id="password"><input type="text" class="password" value="${datos[i][j].password}"></input></td>
+        <td scope="row" id="perfil">
+        <select name="perfil" class="perfil">
+        <option select value="${datos[i][j].perfil}">${datos[i][j].perfil}</option>
+        <option value="usuario">Usuario</option>
+        <option value="adminusuarios">AdminUsuarios</option>
+        <option value="administrador">Administrador</option>
+        </select>
         <td>
         <a class="edit-row">
         Edit
@@ -41,30 +47,7 @@ function tabla(datos){
     `
     }
   }
-  /*
-  $('table').on('click', '.edit-row', function(e){
-        $('.description').prop('disabled', false); 
-
-        let row =$(this).closest('tr');
-        let id = row.find('.id').text();
-        let entrytime = row.find('.entrytime').val();
-        let departuretime = row.find('.departuretime').val();
-        let description=row.find('.description').val();
-        $.ajax({
-            url:'/api/hour/' + id, 
-            method: 'PUT',
-             headers: myHeaders,
-            data:{
-                entrytime:entrytime,
-                departuretime:departuretime,
-                description:description
-            },
-                success: function (response){
-                    console.log(response);
-                }
-        })
-    })
-
+/*
   $('table').on('click', '.delete-row', function(e){
         let row =$(this).closest('tr');
         let id = row.find('.id').text();
@@ -80,6 +63,36 @@ function tabla(datos){
         })
     })*/
 }
+
+
+  $('table').on('click', '.edit-row', function(e){
+        $('.description').prop('disabled', false); 
+
+        let row =$(this).closest('tr');
+        let id = row.find('.id').text();
+        let email = row.find('.email').val();
+        let address = row.find('.address').val();
+        let mobile = row.find('.mobile').val();
+        let perfil=row.find('.perfil option:selected').val();
+        $.ajax({
+            url:'/api/user/' + id, 
+            method: 'PUT',
+            beforeSend: function ( xhr ) {
+                xhr.setRequestHeader('authorization', `Bearer `+ localStorage.token);
+                },
+            data:{
+                email:email,
+                address:address,
+                mobile: mobile,
+                perfil: perfil
+            },
+                success: function (response){
+                    console.log(response);
+                    alert("Usuario Actualizado");
+                    traer();
+                }
+        })
+    })
 
 
 

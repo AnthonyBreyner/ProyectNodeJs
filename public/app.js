@@ -3,8 +3,8 @@ var mostar=document.querySelector('#mostar')
 function traer(){
   const myHeaders = new Headers();
   myHeaders.append('authorization', `Bearer ${localStorage.token}`)
-  alert(myHeaders)
-  fetch('/api/hour', {
+  if(localStorage.perfil == 'administrador'){
+    fetch('/api/hour', {
     method: 'GET',
     headers: myHeaders
   })
@@ -13,6 +13,20 @@ function traer(){
        //console.log(datos)
        tabla(datos)
     })
+  }else{
+    fetch('/api/houruser', {
+    method: 'POST',
+    data:{
+        user:localStorage.userid
+    },
+    headers: myHeaders
+  })
+    .then(res => res.json())
+    .then(datos => {
+       //console.log(datos)
+       tabla(datos)
+    })
+  } 
 }
 
 function tabla(datos){
@@ -21,7 +35,11 @@ function tabla(datos){
   for(let i in datos){
     for(let j in datos[i]){
     if(datos[i][j].horapref == 1) {var pref="success";} else {pref="danger";}
-   
+    
+
+    var sumatorioHorario = new Horario("14:00","1:00");
+    var sumatorio = sumatorioHorario.sumatorioHorario();
+
     mostrar.innerHTML+=`
       <tr class="${pref}">
         <td scope="row" class="id" style="display:none">${datos[i][j]._id}</td>
@@ -29,7 +47,7 @@ function tabla(datos){
         <td scope="row">${datos[i][j].currenttime}</td>
         <td scope="row" id="entrytime"><input type="text" class="entrytime" value="${datos[i][j].entrytime}"></input></td>
         <td scope="row" id="currenttime"><input type="text" class="departuretime" value="${datos[i][j].departuretime}" ></input></td>
-        <td scope="row" id="resultado">h</td>
+        <td scope="row" id="resultado">${sumatorio}</td>
         <td scope="row" ><input type="text" class="description" value="${datos[i][j].description}"></input></td>
         <td>
         <a class="edit-row">

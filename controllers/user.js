@@ -39,13 +39,30 @@ function signIn (req, res) {
     res.status(200).send({
       message: 'Te has logueado correctamente',
       token: service.createToken(user),
-      type: 0,
+      userid:user._id,
+      perfil:user.perfil,
+      name:user.email,
     })
   })
 }
 
+function updateUser(req,res){
+  let userid=req.params.userid
+  let update=req.body
+  console.log(userid, update)
+
+
+  User.findByIdAndUpdate(userid, update, (err, userUpdate)=>{
+    if(err) res.status(500).send({message:`Error al actualizar ${err}`})
+
+    res.status(200).send({message:`Usuario actualizado ${userUpdate}`})
+  })
+}
+
+
 module.exports = {
   signUp,
   getUser,
-  signIn
+  signIn,
+  updateUser
 }

@@ -21,17 +21,12 @@ function getHours(req,res){
 	})
 }
 
-function horasuser (req, res) {
-  hours.findOne({ email:req.body.email}, (err, user) => {
+function horasuser (req, res) { 
+  Hour.find({ userid:req.body.userid}, (err, hours) => {
     if (err) return res.status(500).send({ message: err })
-    if (!user) return res.status(404).send({ message: 'No existe el usuario', email:req.body.email })
+    if (!hours) return res.status(404).send({ message: 'No existe' })
  
-    req.user = user
-    res.status(200).send({
-      message: 'Te has logueado correctamente',
-      token: service.createToken(user),
-      type: 0,
-    })
+    res.send(200, {hours})
   })
 }
 
@@ -45,6 +40,7 @@ function saveHour(req,res){
 	hour.departuretime=req.body.departuretime
 	hour.horapref=req.body.horapref
 	hour.description=req.body.description
+	hour.userid=req.body.userid
 
 
 	hour.save((err,hoursStored)=>{
@@ -85,6 +81,7 @@ module.exports={
 	getHours,
 	saveHour,
 	updateHour,
-	deleteHour
+	deleteHour,
+	horasuser
 	
 }
