@@ -4,21 +4,22 @@ const User = require('../models/user')
 const service = require('../services')
 
 function signUp (req, res) {
-  const user = new User({
-    email: req.body.email,
-    displayName: req.body.displayName,
-    address: req.body.address,
-    mobile: req.body.mobile,
-    password: req.body.password
-  })
+  let user = new User()
 
-  user.save((err) => {
+    user.email= req.body.email,
+    user.displayName= req.body.displayName,
+    user.address= req.body.address,
+    user.mobile= req.body.mobile,
+    user.password= req.body.password
+ 
+
+  user.save((err, userstorage) => {
     if (err) return res.status(500).send({ message: `Error al crear el usuario: ${err}` })
+    service.createToken(user)
 
-
-    return res.status(201).send({ token: service.createToken(user) })
-    res.status(200).send({message:"Se registro con exito"})
+    res.status(200).send({message:"Se registro con exito", user:userstorage})
   })
+
 }
 
 function getUser(req,res){ 
@@ -65,7 +66,7 @@ function deleteUser(req,res){
   User.findById(userid, (err, user)=>{
     if(err) res.status(500).send({message:`Error al borrar ${err}`})
       
-    User.remove(err=>{
+    user.remove(err=>{
       if(err) res.status(500).send({message:`Error al borrar Usuraio ${err}`})
       res.status(200).send({message:`Eliminado.`})
     })

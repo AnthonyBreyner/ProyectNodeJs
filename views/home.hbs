@@ -277,7 +277,7 @@
                 }
             })
 
-$('#hora').on('submit', function(e){
+                $('#hora').on('submit', function(e){
                 e.preventDefault();
                 
                 let entrytime = $('#timepicker-default');
@@ -304,10 +304,13 @@ $('#hora').on('submit', function(e){
                 success: function(response){
                     alert("Se registro con exito.");
                     console.log(response);
-                    
+                   
+                    $('#description').val(' ');
+                    $('#horapref').removeAttr('checked');
+                              
                 }
                 })
-
+                
              });
 
             

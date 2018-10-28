@@ -124,9 +124,8 @@
 			jQuery(document).ready(function() {
 				Main.init();
 				Login.init();
-			});
 
-			 $('#usario').on('submit', function(e){
+				$('#usario').on('submit', function(e){
 			    e.preventDefault();
 			 	let email = $('#email');
 			 	let displayName = $('#displayName');
@@ -149,8 +148,11 @@
                     location.href="/login";
                 }
 			 	});
-
+			 	return false;
 			 });
+			});
+
+
 	
             /*const formusuario = document.querySelector('#usuario')
             const formData = new FormData(formusuario)

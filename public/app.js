@@ -1,7 +1,8 @@
 var mostar = document.querySelector('#mostar')
 
 function traer() {
-    const myHeaders = new Headers();
+    /*const myHeaders = new Headers();
+    alert(localStorage.userid);
     myHeaders.append('authorization', `Bearer ${localStorage.token}`)
         fetch('/api/houruser', {
             method: 'POST',
@@ -15,7 +16,23 @@ function traer() {
             console.log(localStorage.userid)
             //console.log(datos)
             tabla(datos)
-        })
+        })*/
+         $.ajax({
+                url: '/api/houruser',
+                method: 'POST',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('authorization', `Bearer ` + localStorage.token);
+                },
+                data: {
+                   userid: localStorage.userid
+
+                },
+                success: function(datos){
+                   tabla(datos)
+                }
+                })
+
+
 }
 
 function tabla(datos) {
@@ -42,7 +59,7 @@ function tabla(datos) {
                 if (horafinal.substr(1, 1) == ":") {
                 suma1 =horafinal.substr(0, 1);}
                 }
-                alert(suma1)
+
            var mints=datos[i][j].entrytime.substr(2, 2)
             if (mints.substr(0, 1)==":") {mints=datos[i][j].entrytime.substr(3, 2)}
              //Fin hora entrada
