@@ -7,6 +7,7 @@ const HoursSchema=Schema({
 	departuretime:{type: String},
 	horapref:{type: Number},
 	description: String,
-	userid: String
+	userid: String,
+	name: String
 })
 module.exports=mongoose.model('Hours', HoursSchema)

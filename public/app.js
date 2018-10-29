@@ -17,26 +17,23 @@ function traer() {
             //console.log(datos)
             tabla(datos)
         })*/
-         $.ajax({
-                url: '/api/houruser',
-                method: 'POST',
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('authorization', `Bearer ` + localStorage.token);
-                },
-                data: {
-                   userid: localStorage.userid
-
-                },
-                success: function(datos){
-                   tabla(datos)
-                }
-                })
-
-
+    $.ajax({
+        url: '/api/houruser',
+        method: 'POST',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('authorization', `Bearer ` + localStorage.token);
+        },
+        data: {
+            userid: localStorage.userid
+        },
+        success: function(datos) {
+            tabla(datos)
+        }
+    })
 }
 
 function tabla(datos) {
-    console.log(datos)    
+    console.log(datos)
     mostrar.innerHTML = ''
     for (let i in datos) {
         for (let j in datos[i]) {
@@ -46,43 +43,49 @@ function tabla(datos) {
                 pref = "danger";
             }
             //Hora entradra
-            if ((datos[i][j].entrytime.substr(6, 2) == "PM")||(datos[i][j].entrytime.substr(5, 2) == "PM")) {
+            if ((datos[i][j].entrytime.substr(6, 2) == "PM") || (datos[i][j].entrytime.substr(5, 2) == "PM")) {
                 var horafinal = datos[i][j].entrytime.substr(0, 2);
-                var  suma1 = parseInt(horafinal) + 12;
+                var suma1 = parseInt(horafinal) + 12;
                 if (horafinal.substr(1, 1) == ":") {
                     horafinal = horafinal.substr(0, 1);
                     suma1 = parseInt(horafinal) + 12;
                 }
-            }else {
-                horafinal =  datos[i][j].entrytime.substr(0, 2);
-                suma2 = horafinal;
+            } else {
+                horafinal = datos[i][j].entrytime.substr(0, 2);
+                suma1 = horafinal;
                 if (horafinal.substr(1, 1) == ":") {
-                suma1 =horafinal.substr(0, 1);}
+                    suma1 = horafinal.substr(0, 1);
                 }
-
-           var mints=datos[i][j].entrytime.substr(2, 2)
-            if (mints.substr(0, 1)==":") {mints=datos[i][j].entrytime.substr(3, 2)}
-             //Fin hora entrada
-             //Hora Salida   
-            if ((datos[i][j].departuretime.substr(6, 2) == "PM")||(datos[i][j].departuretime.substr(5, 2) == "PM")) {
+            }
+            var mints = datos[i][j].entrytime.substr(2, 2)
+            if (mints.substr(0, 1) == ":") {
+                mints = datos[i][j].entrytime.substr(3, 2)
+            }
+            //Fin hora entrada
+            //Hora Salida   
+            if ((datos[i][j].departuretime.substr(6, 2) == "PM") || (datos[i][j].departuretime.substr(5, 2) == "PM")) {
                 var horafinal = datos[i][j].departuretime.substr(0, 2);
-                var  suma2 = parseInt(horafinal) + 12;
+                var suma2 = parseInt(horafinal) + 12;
                 if (horafinal.substr(1, 1) == ":") {
                     horafinal = horafinal.substr(0, 1);
                     suma2 = parseInt(horafinal) + 12;
                 }
-            }else {
-                horafinal =  datos[i][j].departuretime.substr(0, 2);
+            } else {
+                horafinal = datos[i][j].departuretime.substr(0, 2);
                 suma2 = horafinal;
                 if (horafinal.substr(1, 1) == ":") {
-                suma2 =horafinal.substr(0, 1);}
+                    suma2 = horafinal.substr(0, 1);
                 }
-                var mintsf=datos[i][j].departuretime.substr(2, 2)
-                if (mintsf.substr(0, 1)==":") {mintsf=datos[i][j].departuretime.substr(3, 2)}
+            }
+            var mintsf = datos[i][j].departuretime.substr(2, 2)
+            if (mintsf.substr(0, 1) == ":") {
+                mintsf = datos[i][j].departuretime.substr(3, 2)
+            }
             //Fin Hora salida
-            var sumatorioHorario = new Horario(suma1+":"+mints, suma2+":"+mintsf);
+            var sumatorioHorario = new Horario(suma1 + ":" + mints, suma2 + ":" + mintsf);
             var sumatorio = sumatorioHorario.sumatorioHorario();
-            var horastra =sumatorio.substr(0, 2);
+            var horastra = sumatorio.substr(0, 2);
+
             mostrar.innerHTML += `
       <tr class="${pref}">
         <td scope="row" class="id" style="display:none">${datos[i][j]._id}</td>

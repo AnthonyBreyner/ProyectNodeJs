@@ -61,7 +61,7 @@
                         <a href="/verhorasdetrabajo">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-package"></i>
+                                    <i class="ti-menu-alt"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Horas de trabajo </span>
@@ -73,7 +73,7 @@
                         <a href="adminusuarios">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-menu-alt"></i>
+                                    <i class="ti-user"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Administrador de Usuarios </span>
@@ -85,7 +85,7 @@
                         <a href="maps.html">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-location-pin"></i>
+                                    <i class="ti-settings"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Administrador </span>
@@ -95,14 +95,6 @@
                     </li>
                 </ul>
                 <!-- end: MAIN NAVIGATION MENU -->
-                <!-- start: DOCUMENTATION BUTTON -->
-                <div class="wrapper">
-                    <a href="documentation.html" class="button-o">
-                        <i class="ti-help"></i>
-                        <span>Documentation</span>
-                    </a>
-                </div>
-                <!-- end: DOCUMENTATION BUTTON -->
             </nav>
         </div>
     </div>
@@ -137,15 +129,11 @@
                     <!-- start: USER OPTIONS DROPDOWN -->
                     <li class="dropdown current-user">
                         <a href class="dropdown-toggle" data-toggle="dropdown">
-                           <span class="username">Peter <i
+                           <span class="username"><label id="displayname"></label> <i
                                 class="ti-angle-down"></i></i></span>
                         </a>
                         <ul class="dropdown-menu dropdown-dark">
-                            <li>
-                                <a href="pages_user_profile.html">
-                                    My Profile
-                                </a>
-                            </li>
+
                             <li>
                                 <a onclick="logout()">
                                     Log Out
@@ -162,7 +150,7 @@
                 </div>
                 <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
             </div>
-            <a class="dropdown-off-sidebar" class="app-offsidebar-open" href="onclick="logout()"">
+            <a class="dropdown-off-sidebar" class="app-offsidebar-open" onclick="logout()">
                 &nbsp;
             </a>
             <!-- end: NAVBAR COLLAPSE -->
@@ -183,9 +171,27 @@
                                 <div class="col-md-12">
                                     <div class="panel panel-white no-radius">
                                         <div class="panel-body">
-                                        <button type="button" id="rangoSubmit" onclick="traer()">
+                                            <div class="row">
+                                            <div class="col-md-6">
+                                        <button type="button" id="rangoSubmit" class="btn btn-primary" onclick="traer()">
                                                     Mostrar Horas <i class="fa fa-arrow-circle-right"></i>
                                                 </button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                 <form>
+                                                <div class="input-group">
+                                                            <input type="email" id="email" class="form-control" placeholder="Ingrese el email">
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-primary" onclick="buscar()">
+                                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                                    Buscar
+                                                                </button> </span>
+                                                        </div>
+                                                </button>
+                                                </form>
+                                                </div>
+                                                </div>
+                                           
                                         <div class="row">
                                 <div class="col-md-12">
                                 <br>
@@ -195,6 +201,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Fecha</th>
+                                                <th>Usuario</th>
                                                 <th>Hora de entrada</th>
                                                 <th>Hora de Salida</th>
                                                 <th>Horas trabajadas</th>
@@ -254,6 +261,7 @@
         <script src="prueba.js"></script>
         <script src="app2.js"></script>
         <script src="vendor/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
         <script src="assets/js/main.js"></script>
         <!-- start: JavaScript Event Handlers for this page -->
@@ -262,6 +270,7 @@
              jQuery(document).ready(function() {
                 Main.init();
                 FormElements.init();
+                $("#displayname").html(localStorage.name);
             })
         </script>
         <!-- end: JavaScript Event Handlers for this page -->

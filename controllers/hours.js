@@ -30,6 +30,15 @@ function horasuser (req, res) {
   })
 }
 
+function horaemail (req, res) { 
+  Hour.find({ name:req.body.name}, (err, hours) => {
+    if (err) return res.status(500).send({ message: err })
+    if (!hours) return res.status(404).send({ message: 'No existe' })
+ 
+    res.send(200, {hours})
+  })
+}
+
 function saveHour(req,res){
 	console.log('POST /api/hour')
 	console.log(req.body)
@@ -41,6 +50,7 @@ function saveHour(req,res){
 	hour.horapref=req.body.horapref
 	hour.description=req.body.description
 	hour.userid=req.body.userid
+	hour.name=req.body.name
 
 
 	hour.save((err,hoursStored)=>{
@@ -82,6 +92,7 @@ module.exports={
 	saveHour,
 	updateHour,
 	deleteHour,
-	horasuser
+	horasuser,
+	horaemail
 	
 }

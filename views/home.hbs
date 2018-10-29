@@ -60,7 +60,7 @@
                         <a href="/verhorasdetrabajo">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-package"></i>
+                                    <i class="ti-menu-alt"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Horas de trabajo </span>
@@ -72,7 +72,7 @@
                         <a href="/adminusuarios">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-menu-alt"></i>
+                                    <i class="ti-user"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Administrador de Usuarios </span>
@@ -84,7 +84,7 @@
                         <a href="/administrador">
                             <div class="item-content">
                                 <div class="item-media">
-                                    <i class="ti-location-pin"></i>
+                                    <i class="ti-settings"></i>
                                 </div>
                                 <div class="item-inner">
                                     <span class="title"> Administrador </span>
@@ -285,6 +285,7 @@
                 let description = $('#description');
                 let horapref = $('input:checkbox[name=horapref]:checked');
                 let userid = localStorage.userid;
+                let name = localStorage.name;
                 if(localStorage.perfil =="usuario"){
 
                 }
@@ -300,13 +301,14 @@
                     horapref: horapref.val(),
                     description: description.val(),
                     userid: userid,
+                    name: name,
                 },
                 success: function(response){
                     alert("Se registro con exito.");
                     console.log(response);
                    
                     $('#description').val(' ');
-                    $('#horapref').removeAttr('checked');
+                    $('#checkbox11').attr('checked', false);
                               
                 }
                 })
